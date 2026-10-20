@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration - CareerConnect</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .box {
+            background: white;
+            width: 350px;
+            max-width: calc(100% - 60px);
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px #0002;
+        }
+        h1 { color: #172554; text-align: center; }
+        input, select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 12px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        a { color: #2563eb; }
+    </style>
+</head>
+<body>
+<div class="box">
+    <h1>CareerConnect</h1>
+    <h3>Student Registration</h3>
+
+    <p th:if="${error}" th:text="${error}" style="color:red;"></p>
+
+    <form th:action="@{/register}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}"
+               th:value="${_csrf.token}">
+
+        <input type="text" name="fullName"
+               placeholder="Full name" required>
+
+        <input type="email" name="email"
+               placeholder="Email address" required>
+
+        <input type="text" name="username"
+               placeholder="Choose a username" required>
+
+        <input type="password" name="password"
+               placeholder="Choose a password" minlength="8" required>
+
+        <select name="branch" required>
+            <option value="">Select branch</option>
+            <option value="IT">Information Technology</option>
+            <option value="CSE">Computer Science</option>
+            <option value="ECE">Electronics and Communication</option>
+            <option value="EEE">Electrical and Electronics</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <button type="submit">Create Account</button>
+    </form>
+
+    <p>Already registered? <a th:href="@{/login}">Login</a></p>
+</div>
+</body>
+</html>

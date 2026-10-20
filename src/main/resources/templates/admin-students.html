@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Manage Students</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f5ff;
+            padding: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background: #3549a5;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>CareerConnect - Registered Students</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Branch</th>
+    </tr>
+
+    <tr th:each="student : ${students}">
+        <td th:text="${student.id}"></td>
+        <td th:text="${student.fullName}"></td>
+        <td th:text="${student.username}"></td>
+        <td th:text="${student.email}"></td>
+        <td th:text="${student.branch}"></td>
+    </tr>
+</table>
+
+<p th:if="${#lists.isEmpty(students)}">
+    No students registered yet.
+</p>
+
+<br>
+
+<a th:href="@{/dashboard}">Back to Dashboard</a>
+
+</body>
+</html>

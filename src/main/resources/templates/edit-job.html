@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Job</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f5ff;
+            padding: 25px;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            max-width: 450px;
+            border-radius: 10px;
+        }
+
+        input, textarea {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 15px;
+        }
+
+        button {
+            background: #3549a5;
+            color: white;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Edit Job Details</h1>
+
+<form th:action="@{/admin/jobs/{id}/edit(id=${job.id})}"
+      method="post">
+
+    <input type="hidden"
+           th:name="${_csrf.parameterName}"
+           th:value="${_csrf.token}">
+
+    <label>Company Name</label>
+    <input type="text" name="companyName"
+           th:value="${job.companyName}" required>
+
+    <label>Job Role</label>
+    <input type="text" name="jobRole"
+           th:value="${job.jobRole}" required>
+
+    <label>Description</label>
+    <textarea name="description"
+              th:text="${job.description}" required></textarea>
+
+    <label>Eligibility</label>
+    <input type="text" name="eligibility"
+           th:value="${job.eligibility}" required>
+
+    <label>Salary Package</label>
+    <input type="text" name="salaryPackage"
+           th:value="${job.salaryPackage}" required>
+
+    <button type="submit">Save Changes</button>
+</form>
+
+<br>
+<a th:href="@{/admin/jobs}">Back to Manage Jobs</a>
+
+</body>
+</html>

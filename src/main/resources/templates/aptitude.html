@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aptitude Practice - CareerConnect</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2ff;
+            margin: 0;
+            padding: 30px 15px;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+        }
+        h1 { color: #172554; }
+        .question {
+            padding: 15px;
+            margin: 15px 0;
+            background: #f8faff;
+            border-radius: 8px;
+        }
+        label { display: block; margin: 10px 0; }
+        button {
+            padding: 12px 20px;
+            background: #2563eb;
+            color: white;
+            border: 0;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Aptitude Practice Test</h1>
+    <p>Choose one answer for each question. Each question carries 1 mark.</p>
+
+    <form th:action="@{/aptitude}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}"
+               th:value="${_csrf.token}">
+
+        <div class="question">
+            <p><strong>1. What is 15 + 27?</strong></p>
+            <label><input type="radio" name="q1" value="a" required> 40</label>
+            <label><input type="radio" name="q1" value="b"> 42</label>
+            <label><input type="radio" name="q1" value="c"> 43</label>
+            <label><input type="radio" name="q1" value="d"> 45</label>
+        </div>
+
+        <div class="question">
+            <p><strong>2. What is 12 × 8?</strong></p>
+            <label><input type="radio" name="q2" value="a" required> 84</label>
+            <label><input type="radio" name="q2" value="b"> 88</label>
+            <label><input type="radio" name="q2" value="c"> 96</label>
+            <label><input type="radio" name="q2" value="d"> 98</label>
+        </div>
+
+        <div class="question">
+            <p><strong>3. Which number comes next: 2, 4, 6, 8, __?</strong></p>
+            <label><input type="radio" name="q3" value="a" required> 10</label>
+            <label><input type="radio" name="q3" value="b"> 11</label>
+            <label><input type="radio" name="q3" value="c"> 12</label>
+            <label><input type="radio" name="q3" value="d"> 14</label>
+        </div>
+
+        <div class="question">
+            <p><strong>4. A book costs ₹100. A 10% discount is given. What is the final price?</strong></p>
+            <label><input type="radio" name="q4" value="a" required> ₹80</label>
+            <label><input type="radio" name="q4" value="b"> ₹85</label>
+            <label><input type="radio" name="q4" value="c"> ₹95</label>
+            <label><input type="radio" name="q4" value="d"> ₹90</label>
+        </div>
+
+        <div class="question">
+            <p><strong>5. If 5 pens cost ₹25, what is the cost of 1 pen?</strong></p>
+            <label><input type="radio" name="q5" value="a" required> ₹4</label>
+            <label><input type="radio" name="q5" value="b"> ₹5</label>
+            <label><input type="radio" name="q5" value="c"> ₹10</label>
+            <label><input type="radio" name="q5" value="d"> ₹15</label>
+        </div>
+
+        <button type="submit">Submit Test</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Progress</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f5ff;
+            padding: 25px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        th {
+            background: #3549a5;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<h1>My Aptitude Progress</h1>
+
+<table>
+    <tr>
+        <th>Attempt</th>
+        <th>Score</th>
+        <th>Total Marks</th>
+        <th>Percentage</th>
+    </tr>
+
+    <tr th:each="result, stat : ${scores}">
+        <td th:text="${stat.count}"></td>
+        <td th:text="${result.score}"></td>
+        <td th:text="${result.total}"></td>
+        <td th:text="${result.total > 0 ? (result.score * 100 / result.total) + '%' : 'N/A'}"></td>
+    </tr>
+</table>
+
+<p th:if="${#lists.isEmpty(scores)}">
+    You haven't attempted the aptitude test yet.
+</p>
+
+<br>
+<a th:href="@{/aptitude}">Practice Again</a>
+<br><br>
+<a th:href="@{/dashboard}">Back to Dashboard</a>
+
+</body>
+</html>

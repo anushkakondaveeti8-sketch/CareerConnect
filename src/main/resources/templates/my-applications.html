@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Applications</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background: #f2f5ff;
+        }
+        table {
+            width: 100%;
+            background: white;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background: #3549a5;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<h1>My Job Applications</h1>
+
+<p th:if="${param.success}">
+    Application submitted successfully!
+</p>
+<p th:if="${param.duplicate}">
+    You have already applied for this job.
+</p>
+
+<table>
+    <tr>
+        <th>Company</th>
+        <th>Job Role</th>
+        <th>Package</th>
+        <th>Status</th>
+    </tr>
+    <tr th:each="app : ${applications}">
+        <td th:text="${app.job.companyName}"></td>
+        <td th:text="${app.job.jobRole}"></td>
+        <td th:text="${app.job.salaryPackage}"></td>
+        <td th:text="${app.status}"></td>
+    </tr>
+</table>
+
+<p th:if="${#lists.isEmpty(applications)}">
+    You have not applied for any jobs yet.
+</p>
+
+<br>
+<a th:href="@{/jobs}">View Jobs</a> |
+<a th:href="@{/dashboard}">Dashboard</a>
+
+</body>
+</html>
