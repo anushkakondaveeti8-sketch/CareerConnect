@@ -1,6 +1,6 @@
 
 package com.placement.portal.config;
-
+import org.springframework.beans.factory.annotation.Value;
 import com.placement.portal.repository.StudentRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,10 +20,12 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
+    
     @Bean
     public UserDetailsService userDetailsService(
-            StudentRepository studentRepository) {
+            StudentRepository studentRepository,
+            @Value("${ADMIN_USERNAME}") String adminUsername,
+            @Value("${ADMIN_PASSWORD}") String adminPassword) {
 
         UserDetailsService studentService = username -> {
             var student = studentRepository.findByUsername(username)
@@ -36,20 +38,22 @@ public class SecurityConfig {
                     .build();
         };
 
-        var admin = User.withUsername("admin")
-                .password(passwordEncoder().encode("admin123"))
+        var admin = User.withUsername(adminUsername)
+                .password(passwordEncoder().encode(adminPassword))
                 .roles("ADMIN")
                 .build();
 
         var adminService = new InMemoryUserDetailsManager(admin);
 
         return username -> {
-            if ("admin".equals(username)) {
+            if (adminUsername.equals(username)) {
                 return adminService.loadUserByUsername(username);
             }
             return studentService.loadUserByUsername(username);
         };
     }
+
+    
 
     @Bean
     public SecurityFilterChain securityFilterChain(
